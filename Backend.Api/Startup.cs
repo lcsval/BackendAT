@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.IO;
+using Backend.Domain.Interfaces.Handlers;
+using Backend.Domain.Interfaces.Infra;
+using Backend.Domain.Interfaces.Repositories.Read;
+using Backend.Domain.Interfaces.Repositories.Write;
+using Backend.Handler.Handler;
 using Backend.Infra.Repositories;
+using Backend.Infra.Repositories.Read;
+using Backend.Infra.Repositories.Write;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,6 +30,7 @@ namespace Backend.Api
             Settings.OpenWeatherKey = $"{Configuration["OpenWeatherKey"]}";
             Settings.SpotifyClientId = $"{Configuration["SpotifyClientId"]}";
             Settings.SpotifyClientSecret = $"{Configuration["SpotifyClientSecret"]}";
+            Settings.ConnectionString = $"{Configuration["ConnectionString"]}";
 
             var corsBuilder = new CorsPolicyBuilder();
             corsBuilder.AllowAnyHeader();
@@ -44,10 +47,10 @@ namespace Backend.Api
 
             services.AddSingleton<IConfiguration>(Configuration);
 
-            // services.AddTransient<IUnitOfWork, UnitOfWork>();
-            // services.AddTransient<IShelterReadRepository, ShelterReadRepository>();
-            // services.AddTransient<IShelterWriteRepository, ShelterWriteRepository>();
-            // services.AddTransient<IShelterCommandHandler, ShelterCommandHandler>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IWeatherReadRepository, WeatherReadRepository>();
+            services.AddTransient<IWeatherWriteRepository, WeatherWriteRepository>();
+            services.AddTransient<IWeatherCommandHandler, WeatherCommandHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
