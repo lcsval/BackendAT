@@ -51,6 +51,7 @@ namespace Backend.Api
             services.AddTransient<IWeatherReadRepository, WeatherReadRepository>();
             services.AddTransient<IWeatherWriteRepository, WeatherWriteRepository>();
             services.AddTransient<IWeatherCommandHandler, WeatherCommandHandler>();
+            services.AddTransient<ISongsCommandHandler, SongsCommandHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
