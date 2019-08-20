@@ -43,13 +43,13 @@ namespace Backend.Handler.Handler
             string type;
             switch (temperature)
             {
-                case double t when (t >= 30):
+                case double temp when (temp >= 30):
                     type = "party";
                     break;
-                case double t when (t >= 15 && t < 30):
+                case double temp when (temp >= 15 && temp < 30):
                     type = "pop";
                     break;
-                case double t when (t >= 10 && t < 15):
+                case double temp when (temp >= 10 && temp < 15):
                     type = "rock";
                     break;
                 default:
