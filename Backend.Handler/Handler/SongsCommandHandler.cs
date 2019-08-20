@@ -75,7 +75,11 @@ namespace Backend.Handler.Handler
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     rootWeather = JsonConvert.DeserializeObject<RootWeather>(apiResponse);
-                    return rootWeather.main.temp;
+
+                    if (rootWeather.cod == 404)
+                        return 0;
+                    else
+                        return rootWeather.main.temp;
                 }
             }
         }
