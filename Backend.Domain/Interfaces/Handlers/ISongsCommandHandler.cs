@@ -7,5 +7,9 @@ namespace Backend.Domain.Interfaces.Handlers
     {
         Task<List<string>> GetSongsPerCity(string city);
         Task<List<string>> GetSongsPerCity(double lat, double lon);
+        string GetStylePerTemperature(double temperature);
+
+        Task<double> GetTemperature(string city);
+        Task<double> GetTemperature(double lat, double lon);
     }
 }

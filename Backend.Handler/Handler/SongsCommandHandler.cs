@@ -38,7 +38,7 @@ namespace Backend.Handler.Handler
             return await GetSongsPerStyle(style);
         }
 
-        private static string GetStylePerTemperature(double temperature)
+        public string GetStylePerTemperature(double temperature)
         {
             string type;
             switch (temperature)
@@ -60,7 +60,7 @@ namespace Backend.Handler.Handler
             return type;
         }
 
-        private async Task<double> GetTemperature(string city)
+        public async Task<double> GetTemperature(string city)
         {
             var url = "http://api.openweathermap.org/data/2.5/weather?q=" +
                 $"{city}" +
@@ -80,7 +80,7 @@ namespace Backend.Handler.Handler
             }
         }
 
-        private async Task<double> GetTemperature(double lat, double lon)
+        public async Task<double> GetTemperature(double lat, double lon)
         {
             var url = "http://api.openweathermap.org/data/2.5/weather?" +
                 $"lat={lat.ToString().Replace(",", ".")}" +
